@@ -19,7 +19,8 @@ public class DefaultSubscriber<T> implements Subscriber<T> {
 	
 	@Override
 	public void onSubscribe(Subscription subscription) {
-		subscription.request(Long.MAX_VALUE);
+		this.subscription = subscription;
+		this.subscription.request(Long.MAX_VALUE);
 	}
 	
 	@Override
