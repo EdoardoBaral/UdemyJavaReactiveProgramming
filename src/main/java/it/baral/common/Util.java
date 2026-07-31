@@ -2,11 +2,16 @@ package it.baral.common;
 
 import com.github.javafaker.Faker;
 import org.reactivestreams.Subscriber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import reactor.core.publisher.Flux;
 
 import java.time.Duration;
+import java.util.function.UnaryOperator;
 
 public class Util {
 	
+	private static final Logger log = LoggerFactory.getLogger(Util.class);
 	private static final Faker faker = Faker.instance();
 	
 	public static <T> Subscriber<T> subscriber() {
@@ -35,5 +40,11 @@ public class Util {
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public static <T> UnaryOperator<Flux<T>> fluxLogger(String producerName) {
+		return flux -> flux.doOnSubscribe(s -> log.info("subscribing to {}", producerName))
+								   .doOnCancel(() -> log.info("cancelling subscription to {}", producerName))
+								   .doOnComplete(() -> log.info("completed {}", producerName));
 	}
 }
