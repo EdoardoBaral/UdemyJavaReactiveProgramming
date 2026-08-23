@@ -100,10 +100,10 @@ public class SinkOne {
 		
 		//Questo secondo tentativo di emissione fallirà perché il sink ha già emesso un valore, quindi il gestore di fallimento loggherà l'esito.
 		sink.emitValue("hello", ((signalType, emitResult) -> {
-			log.info("hello");
-			log.info(signalType.name());
-			log.info(emitResult.name());
-			return false;
-		}));
+									    	log.info("hello");
+									    	log.info(signalType.name());
+									    	log.info(emitResult.name());
+									    	return false;
+								       }));
 	}
 }
