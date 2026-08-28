@@ -6,10 +6,22 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+/**
+ * Dimostra la combinazione di {@code publishOn} e {@code subscribeOn} nella stessa
+ * catena: il primo sposta l'esecuzione degli operatori a valle, il secondo quella
+ * della sorgente, indipendentemente dalla posizione in cui viene dichiarato.
+ */
 public class SubscribeOnPublishOn {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(SubscribeOnPublishOn.class);
-	
+
+	/**
+	 * Costruisce un {@link Flux} con {@code publishOn(Schedulers.parallel())} seguito
+	 * da {@code subscribeOn(Schedulers.boundedElastic())}, mostrando su quali thread
+	 * vengono eseguite le diverse fasi della catena.
+	 *
+	 * @param args argomenti da linea di comando, non utilizzati
+	 */
 	public static void main(String[] args) {
 		Flux<Integer> flux = Flux.create(sink -> {
 								 	for(int i=0; i<3; i++) {

@@ -3,8 +3,13 @@ package it.baral.sec02;
 import it.baral.common.Util;
 import reactor.core.publisher.Mono;
 
+/**
+ * Compito della sezione 2 del corso (Lezione 36): usa {@link FileServiceImpl}
+ * per scrivere, leggere e infine eliminare cinque file di esempio, mostrando
+ * l'uso combinato delle tre operazioni reattive esposte da {@link FileService}.
+ */
 public class FileServiceAssignment {
-	
+
 	private static final String FILE_NAME_1 = "FileServiceExample01.txt";
 	private static final String FILE_NAME_2 = "FileServiceExample02.txt";
 	private static final String FILE_NAME_3 = "FileServiceExample03.txt";
@@ -17,6 +22,12 @@ public class FileServiceAssignment {
 	private static final String FILE_CONTENT_4 = "Contenuto del file FileServiceExample04.txt da utilizzare per il compito della Lezione 36 del corso \"Mastering Java reactive programming (from scratch)\"";
 	private static final String FILE_CONTENT_5 = "Contenuto del file FileServiceExample05.txt da utilizzare per il compito della Lezione 36 del corso \"Mastering Java reactive programming (from scratch)\"";
 	
+	/**
+	 * Scrive, legge ed elimina cinque file di esempio tramite
+	 * {@link FileService}, in tre fasi sequenziali.
+	 *
+	 * @param args argomenti da riga di comando (non utilizzati)
+	 */
 	public static void main(String[] args) {
 		FileService fileService = new FileServiceImpl();
 		

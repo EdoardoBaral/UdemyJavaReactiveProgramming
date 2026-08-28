@@ -6,10 +6,22 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+/**
+ * Dimostra l'effetto dell'operatore {@code subscribeOn}: sposta l'esecuzione della
+ * sorgente (compresa la fase di generazione) sullo scheduler indicato, indipendentemente
+ * dalla sua posizione nella catena.
+ */
 public class SubscribeOn {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(SubscribeOn.class);
-	
+
+	/**
+	 * Costruisce un {@link Flux} con {@code subscribeOn(Schedulers.boundedElastic())}
+	 * e lo sottoscrive da due thread differenti per osservare su quale thread viene
+	 * effettivamente eseguita la generazione dei valori.
+	 *
+	 * @param args argomenti da linea di comando, non utilizzati
+	 */
 	public static void main(String[] args) {
 		Flux<Integer> flux = Flux.create(sink -> {
 								   for(int i=0; i<3; i++) {

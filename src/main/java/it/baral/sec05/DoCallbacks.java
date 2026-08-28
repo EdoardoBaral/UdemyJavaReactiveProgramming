@@ -5,12 +5,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 
+/**
+ * Dimostra i callback side-effect di Reactor ({@code doOnNext}, {@code doOnComplete},
+ * {@code doOnError}, {@code doOnSubscribe}, {@code doOnRequest}, {@code doOnTerminate},
+ * {@code doOnCancel}, {@code doOnDiscard}, {@code doFirst}, {@code doFinally}), applicati
+ * due volte in punti diversi della catena per osservarne l'ordine di esecuzione.
+ */
 public class DoCallbacks {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(DoCallbacks.class);
-	
+
+	/**
+	 * Crea un {@code Flux} con {@code Flux.create} e vi applica due gruppi di callback
+	 * {@code do*} in punti diversi della catena, per confrontarne l'ordine di invocazione.
+	 *
+	 * @param args argomenti da riga di comando (non utilizzati)
+	 */
 	public static void main(String[] args) {
-		
+
 		Flux.<Integer>create(fluxSink -> {
 				log.info("producer begins");
 				for(int i = 0; i < 4; i++) {

@@ -7,10 +7,21 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
+/**
+ * Mostra il comportamento di un publisher "caldo" (hot) ottenuto con {@code share()}:
+ * l'emissione inizia con il primo sottoscrittore ed è condivisa tra tutti i sottoscrittori
+ * successivi, che quindi possono perdere gli elementi già emessi prima della loro iscrizione.
+ */
 public class HotPublisher {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(HotPublisher.class);
-	
+
+	/**
+	 * Sottoscrive due consumatori in momenti diversi allo stesso {@code Flux} condiviso,
+	 * mostrando che il secondo sottoscrittore riceve solo gli elementi emessi da quel momento in poi.
+	 *
+	 * @param args argomenti da riga di comando (non utilizzati)
+	 */
 	public static void main(String[] args) {
 		Flux<String> movieFlux = movieStream().share();
 		//refCount(1) è un'istruzione equivalente a share() e indica che il publisher deve avere almeno un subscriber prima di iniziare ad emettere elementi
@@ -25,6 +36,12 @@ public class HotPublisher {
 		Util.sleepSeconds(15);
 	}
 	
+	/**
+	 * Simula lo streaming di un film: genera scene numerate con stato, una ogni secondo,
+	 * fino a un massimo di 10.
+	 *
+	 * @return un {@code Flux} di 10 scene, emesse con cadenza di 1 secondo
+	 */
 	private static Flux<String> movieStream() {
 		return Flux.generate(() -> {
 					   log.info("request received");
