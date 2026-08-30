@@ -23,9 +23,9 @@ class FluxVSListTest {
 
 		assertEquals(2, names.size());
 		names.forEach(name -> {
-			assertNotNull(name);
-			assertFalse(name.isBlank());
-		});
+			  	assertNotNull(name);
+			  	assertFalse(name.isBlank());
+			  });
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class FluxVSListTest {
 		AtomicInteger emittedCount = new AtomicInteger(0);
 
 		Flux<String> namesFlux = NameGenerator.generateNamesFlux(2)
-											   .doOnNext(name -> emittedCount.incrementAndGet());
+										      .doOnNext(name -> emittedCount.incrementAndGet());
 
 		assertEquals(0, emittedCount.get(), "Nessun nome deve essere generato prima della sottoscrizione");
 

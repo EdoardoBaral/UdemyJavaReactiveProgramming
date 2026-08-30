@@ -14,7 +14,8 @@ class FluxFromStreamTest {
 	@Test
 	@DisplayName("fromStream() emette gli elementi dello stream nell'ordine originale")
 	void testFromStreamEmitsElementsInOrder() {
-		Stream<Integer> stream = List.of(1, 2, 3, 4, 5).stream();
+		Stream<Integer> stream = List.of(1, 2, 3, 4, 5)
+									 .stream();
 		Flux<Integer> flux = Flux.fromStream(stream);
 
 		StepVerifier.create(flux)

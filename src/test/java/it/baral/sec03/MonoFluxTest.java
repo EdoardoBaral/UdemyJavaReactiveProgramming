@@ -47,7 +47,7 @@ class MonoFluxTest {
 	@DisplayName("next() su un Flux restituisce un Mono con il primo elemento")
 	void testNextReturnsMonoWithFirstElement() {
 		Mono<Integer> mono = Flux.range(1, 10)
-								  .next();
+							     .next();
 
 		StepVerifier.create(mono)
 					.expectNext(1)
@@ -58,7 +58,8 @@ class MonoFluxTest {
 	@Test
 	@DisplayName("next() su un Flux vuoto restituisce un Mono vuoto")
 	void testNextOnEmptyFluxReturnsEmptyMono() {
-		Mono<Integer> mono = Flux.<Integer>empty().next();
+		Mono<Integer> mono = Flux.<Integer>empty()
+								 .next();
 
 		StepVerifier.create(mono)
 					.expectComplete()

@@ -63,10 +63,14 @@ class FileServiceImplTest {
 
 		try {
 			Mono<Void> result1 = fileService.write(fileName, originalContent);
-			StepVerifier.create(result1).expectComplete().verify();
+			StepVerifier.create(result1)
+						.expectComplete()
+						.verify();
 
 			Mono<Void> result2 = fileService.write(fileName, newContent);
-			StepVerifier.create(result2).expectComplete().verify();
+			StepVerifier.create(result2)
+						.expectComplete()
+						.verify();
 
 			String readContent = Files.readString(filePath);
 			assertEquals(newContent, readContent);

@@ -29,8 +29,8 @@ class FluxIntervalTest {
 	@DisplayName("interval() mappato conserva il numero di tick emessi")
 	void testIntervalMappedPreservesTickCount() {
 		StepVerifier.withVirtualTime(() -> Flux.interval(Duration.ofMillis(500))
-												.map(x -> "tick-" + x)
-												.take(5))
+											   .map(x -> "tick-" + x)
+											   .take(5))
 					.expectSubscription()
 					.thenAwait(Duration.ofSeconds(3))
 					.expectNextCount(5)

@@ -137,13 +137,20 @@ class FileServiceAssignmentTest {
 
 		try {
 			Mono<Void> write = fileService.write(fileName, content);
-			StepVerifier.create(write).expectComplete().verify();
+			StepVerifier.create(write)
+						.expectComplete()
+						.verify();
 
 			Mono<String> read = fileService.read(fileName);
-			StepVerifier.create(read).expectNext(content).expectComplete().verify();
+			StepVerifier.create(read)
+						.expectNext(content)
+						.expectComplete()
+						.verify();
 
 			Mono<Void> delete = fileService.delete(fileName);
-			StepVerifier.create(delete).expectComplete().verify();
+			StepVerifier.create(delete)
+						.expectComplete()
+						.verify();
 
 			assertFalse(Files.exists(filePath));
 		} finally {
@@ -164,7 +171,9 @@ class FileServiceAssignmentTest {
 
 		try {
 			Mono<Void> result = fileService.write(fileName, content);
-			StepVerifier.create(result).expectComplete().verify();
+			StepVerifier.create(result)
+						.expectComplete()
+						.verify();
 
 			Mono<String> readResult = fileService.read(fileName);
 			StepVerifier.create(readResult)

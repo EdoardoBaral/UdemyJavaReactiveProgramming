@@ -12,7 +12,7 @@ class LogTest {
 	@DisplayName("log() non altera gli elementi emessi dal Flux")
 	void testLogDoesNotAlterEmittedElements() {
 		Flux<Integer> flux = Flux.range(1, 10)
-								  .log();
+							     .log();
 
 		StepVerifier.create(flux)
 					.expectNext(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -24,7 +24,7 @@ class LogTest {
 	@DisplayName("log() con categoria non altera gli elementi emessi dal Flux")
 	void testLogWithCategoryDoesNotAlterEmittedElements() {
 		Flux<Integer> flux = Flux.range(1, 5)
-								  .log("map-log");
+							     .log("map-log");
 
 		StepVerifier.create(flux)
 					.expectNextCount(5)
@@ -36,9 +36,9 @@ class LogTest {
 	@DisplayName("log() posizionato dopo map() non altera la trasformazione applicata")
 	void testLogAfterMapDoesNotAlterTransformation() {
 		Flux<String> flux = Flux.range(1, 3)
-								 .log()
-								 .map(x -> "value-" + x)
-								 .log("map-log");
+							    .log()
+							    .map(x -> "value-" + x)
+							    .log("map-log");
 
 		StepVerifier.create(flux)
 					.expectNext("value-1", "value-2", "value-3")
@@ -50,7 +50,7 @@ class LogTest {
 	@DisplayName("log() propaga gli errori del Flux invariati")
 	void testLogPropagatesErrorsUnchanged() {
 		Flux<Object> flux = Flux.error(new RuntimeException("boom"))
-								 .log();
+							    .log();
 
 		StepVerifier.create(flux)
 					.expectError(RuntimeException.class)

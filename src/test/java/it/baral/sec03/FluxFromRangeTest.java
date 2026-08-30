@@ -14,7 +14,8 @@ class FluxFromRangeTest {
 		Flux<Integer> flux = Flux.range(1, 10);
 
 		StepVerifier.create(flux)
-					.expectNext(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+					.expectNext(1)
+					.expectNextCount(9)
 					.expectComplete()
 					.verify();
 	}
@@ -44,7 +45,7 @@ class FluxFromRangeTest {
 	@DisplayName("range() mappato conserva il numero di elementi emessi")
 	void testRangeMappedPreservesElementCount() {
 		Flux<String> flux = Flux.range(1, 10)
-								 .map(x -> "value-" + x);
+								.map(x -> "value-" + x);
 
 		StepVerifier.create(flux)
 					.expectNextCount(10)

@@ -40,7 +40,7 @@ class LazyStreamTest {
 	@DisplayName("toList() ritorna una lista con tutti gli elementi")
 	void testStreamToList() {
 		List<Integer> result = Stream.of(1, 2, 3)
-									  .toList();
+									 .toList();
 
 		assertEquals(3, result.size());
 		assertTrue(result.contains(1));
@@ -52,8 +52,8 @@ class LazyStreamTest {
 	@DisplayName("Stream con filter e toList ritorna solo gli elementi filtrati")
 	void testStreamWithFilter() {
 		List<Integer> result = Stream.of(1, 2, 3, 4, 5)
-									  .filter(i -> i % 2 == 0)
-									  .toList();
+									 .filter(i -> i % 2 == 0)
+									 .toList();
 
 		assertEquals(2, result.size());
 		assertTrue(result.contains(2));
@@ -64,8 +64,8 @@ class LazyStreamTest {
 	@DisplayName("Stream con map e toList ritorna elementi trasformati")
 	void testStreamWithMap() {
 		List<Integer> result = Stream.of(1, 2, 3)
-									  .map(i -> i * 2)
-									  .toList();
+									 .map(i -> i * 2)
+									 .toList();
 
 		assertEquals(3, result.size());
 		assertEquals(2, result.get(0));
@@ -77,7 +77,7 @@ class LazyStreamTest {
 	@DisplayName("Stream vuoto ritorna una lista vuota")
 	void testEmptyStream() {
 		List<Integer> result = Stream.<Integer>of()
-									  .toList();
+									 .toList();
 
 		assertTrue(result.isEmpty());
 	}
@@ -86,10 +86,10 @@ class LazyStreamTest {
 	@DisplayName("Stream con un solo elemento ritorna una lista con un elemento")
 	void testStreamWithSingleElement() {
 		List<String> result = Stream.of("single")
-									 .toList();
+									.toList();
 
 		assertEquals(1, result.size());
-		assertEquals("single", result.get(0));
+		assertEquals("single", result.getFirst());
 	}
 
 	@Test
@@ -108,8 +108,8 @@ class LazyStreamTest {
 	@DisplayName("Stream con flatMap espande gli elementi")
 	void testStreamWithFlatMap() {
 		List<Integer> result = Stream.of(1, 2, 3)
-									  .flatMap(i -> Stream.of(i, i * 10))
-									  .toList();
+									 .flatMap(i -> Stream.of(i, i * 10))
+									 .toList();
 
 		assertEquals(6, result.size());
 		assertEquals(1, result.get(0));
